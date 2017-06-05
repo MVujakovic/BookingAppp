@@ -1,0 +1,20 @@
+﻿uputstvo: 
+
+        // u package manager konzoli radimo enable-migrations, to ide samo jednom za projekat
+        // onda pravimo inicijalnu migraciju add-migration Initial
+        // ako nesto yeynemo u nekoj migraciji, ni slucajno ne brisemo migraciju, nego rpavimo novu
+        // koja ponistava efekte prethodne
+        // potom idemo update-database
+
+        //konstruktor da bude public
+
+
+git clone reponame
+git config user.email "miljana_lo@hotmail.com"
+git config user.name "MVujakovic"
+git add .
+git commit -m "Message"
+git push
+
+deinstalirati course neki
+
