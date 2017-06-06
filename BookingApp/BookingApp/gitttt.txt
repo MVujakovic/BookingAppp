@@ -47,3 +47,5 @@ one sign arhitektura, kao ya google. jednom se logujes samo i mozes svuda...kori
 
 /oauth/token gadjamo da dobijemo token
 a u body dajemo username, password i grant_type
+
+kada dodajemo entitete prvo dodamo nezavisa, pa save changes
