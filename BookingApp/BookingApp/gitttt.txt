@@ -36,3 +36,14 @@ istraziti ono attached-ne attached objekti..bla bla, nesto za nove objkete, auto
 ne radimo sa sesijama - zato sto mzoda imamo dva servera, ako padne jedan server gubimo (klijentske) pdoatke.. znaci u ovom
 pristupu mi sve radimo sa bazom, cuvamo u bazi....
 
+
+// ono entry.modified radimo kad spajamo sa cashom, ono attachovanje. to je bitno za podifikovanje put, i tad nam treba id
+ya post nam ne treba jer ne pristupamo kesu
+
+dodati ogranicenja u bazu preko anotacija
+preko seed metohode popuniti bazu
+
+one sign arhitektura, kao ya google. jednom se logujes samo i mozes svuda...koristimo jwt standard
+
+/oauth/token gadjamo da dobijemo token
+a u body dajemo username, password i grant_type
