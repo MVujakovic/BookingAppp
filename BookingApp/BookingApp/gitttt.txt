@@ -2,11 +2,13 @@
 
         // u package manager konzoli radimo enable-migrations, to ide samo jednom za projekat
         // onda pravimo inicijalnu migraciju add-migration Initial
-        // ako nesto yeynemo u nekoj migraciji, ni slucajno ne brisemo migraciju, nego rpavimo novu
+        // ako nesto zeznemo u nekoj migraciji, ni slucajno ne brisemo migraciju, nego pravimo novu
         // koja ponistava efekte prethodne
         // potom idemo update-database
 
         //konstruktor da bude public
+
+		// postman - ne moras da imas frontend da bi imali backend
 
 
 git clone reponame
@@ -17,4 +19,20 @@ git commit -m "Message"
 git push
 
 deinstalirati course neki
+instalirati postman 
+
+
+-- ako imamo niz nekih migracija...verzionisanje kroz njih
+1. drop baze pa update database -> gubimo podatke..ako nam ne prolaze neke migracije, ucinicemo da sema izgleda kako treba sema, ali gubimo podatke
+2. drugo resenje je da forceujemo tu neku migraciju...
+3. i imamo update database target migration pa ime migracije koju hocemo
+
+web api je da se radi sa setom, i tad je bitno da se kontroler nasledjuje iz apicontrolera
+imamo i klasu controler, koja se koristi u MVVC-u (pandan jsp i ostalomm), to nije rest
+ne treba da pogresimo! ne javlja gresku a problem je
+
+istraziti ono attached-ne attached objekti..bla bla, nesto za nove objkete, auto generated id
+
+ne radimo sa sesijama - zato sto mzoda imamo dva servera, ako padne jedan server gubimo (klijentske) pdoatke.. znaci u ovom
+pristupu mi sve radimo sa bazom, cuvamo u bazi....
 
