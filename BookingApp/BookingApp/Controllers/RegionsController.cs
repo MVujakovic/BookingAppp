@@ -15,115 +15,115 @@ namespace BookingApp.Controllers
     [RoutePrefix("api")]
     public class RegionsController : ApiController
     {
-        private BAContext db = new BAContext();
+        //private BAContext db = new BAContext();
 
-        // GET: api/Regions
-        [HttpGet]
-        [Route("Regions")]
-        public IQueryable<Region> GetRegions()
-        {
-            return db.Regions;
-        }
+        //// GET: api/Regions
+        //[HttpGet]
+        //[Route("Regions")]
+        //public IQueryable<Region> GetRegions()
+        //{
+        //    return db.Regions;
+        //}
 
-        // GET: api/Regions/5
-        [HttpGet]
-        [Route("Region/{id}")]
-        [ResponseType(typeof(Region))]
-        public IHttpActionResult GetRegion(int id)
-        {
-            Region region = db.Regions.Find(id);
-            if (region == null)
-            {
-                return NotFound();
-            }
+        //// GET: api/Regions/5
+        //[HttpGet]
+        //[Route("Region/{id}")]
+        //[ResponseType(typeof(Region))]
+        //public IHttpActionResult GetRegion(int id)
+        //{
+        //    Region region = db.Regions.Find(id);
+        //    if (region == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(region);
-        }
+        //    return Ok(region);
+        //}
 
-        // PUT: api/Regions/5
-        [HttpPut]
-        [Route("RegionMod/{id}")]
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutRegion(int id, Region region)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Regions/5
+        //[HttpPut]
+        //[Route("RegionMod/{id}")]
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutRegion(int id, Region region)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != region.Id)
-            {
-                return BadRequest();
-            }
+        //    if (id != region.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(region).State = EntityState.Modified;
+        //    db.Entry(region).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RegionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!RegionExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-        // POST: api/Regions
-        [HttpPost]
-        [Route("RegionPost")]
-        [ResponseType(typeof(Region))]
-        public IHttpActionResult PostRegion(Region region)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/Regions
+        //[HttpPost]
+        //[Route("RegionPost")]
+        //[ResponseType(typeof(Region))]
+        //public IHttpActionResult PostRegion(Region region)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.Regions.Add(region);
-            db.SaveChanges();
+        //    db.Regions.Add(region);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = region.Id }, region);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = region.Id }, region);
+        //}
 
-        // DELETE: api/Regions/5
-        [HttpDelete]
-        [Route("RegionDelete/{id}")]
-        [ResponseType(typeof(Region))]
-        public IHttpActionResult DeleteRegion(int id)
-        {
-            Region region = db.Regions.Find(id);
-            if (region == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Regions/5
+        //[HttpDelete]
+        //[Route("RegionDelete/{id}")]
+        //[ResponseType(typeof(Region))]
+        //public IHttpActionResult DeleteRegion(int id)
+        //{
+        //    Region region = db.Regions.Find(id);
+        //    if (region == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.Regions.Remove(region);
-            db.SaveChanges();
+        //    db.Regions.Remove(region);
+        //    db.SaveChanges();
 
-            return Ok(region);
-        }
+        //    return Ok(region);
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
-        private bool RegionExists(int id)
-        {
-            return db.Regions.Count(e => e.Id == id) > 0;
-        }
+        //private bool RegionExists(int id)
+        //{
+        //    return db.Regions.Count(e => e.Id == id) > 0;
+        //}
     }
 }

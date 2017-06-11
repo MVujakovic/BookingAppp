@@ -18,7 +18,7 @@ namespace BookingApp.Models
         //[Required]
         //[Column(TypeName = "VARCHAR")]
         //[StringLength(10)]
-        //[Index(IsUnique = true)]
+        [Index(IsUnique = true)]
         [MinLength(3), MaxLength(20)]
         public string Code { get; set; }
 

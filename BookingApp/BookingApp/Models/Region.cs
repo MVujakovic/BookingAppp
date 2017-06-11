@@ -12,6 +12,9 @@ namespace BookingApp.Models
         public int Id { get; set; }
 
         [Required]
+        // [Key]
+        //[Column(Order = 2)]
+        [Index(IsUnique = true)]
         [MinLength(3), MaxLength(20)]
         public string Name { get; set; }
 
@@ -24,7 +27,8 @@ namespace BookingApp.Models
         // ako mi preko Id pristupamo tom objektu u bazi
         public Country Country { get; set; }
 
-
+        //[Key]
+        //[Column(Order = 1)]
         [ForeignKey("Country")]
         public int CountryId { get; set; }
 

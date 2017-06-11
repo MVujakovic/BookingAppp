@@ -266,6 +266,10 @@
     <Compile Include="Migrations\201706110048075_Initial.Designer.cs">
       <DependentUpon>201706110048075_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706111218057_mig1.cs" />
+    <Compile Include="Migrations\201706111218057_mig1.Designer.cs">
+      <DependentUpon>201706111218057_mig1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccommodationType.cs" />
     <Compile Include="Models\Accomodation.cs" />
@@ -362,6 +366,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706110048075_Initial.resx">
       <DependentUpon>201706110048075_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706111218057_mig1.resx">
+      <DependentUpon>201706111218057_mig1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
