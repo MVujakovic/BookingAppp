@@ -49,3 +49,7 @@ one sign arhitektura, kao ya google. jednom se logujes samo i mozes svuda...kori
 a u body dajemo username, password i grant_type
 
 kada dodajemo entitete prvo dodamo nezavisa, pa save changes
+
+
+-- korisnooo za vracanje baze u stanje Initial
+Update-database -TargetMigration:name

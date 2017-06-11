@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -10,8 +11,11 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
 
+        [Required]
+        [MinLength(3), MaxLength(20)]
         public String Name { get; set; }
 
+        [MaxLength(200)]
         public String Description { get; set; }
 
         public String Address { get; set; }
@@ -33,9 +37,7 @@ namespace BookingApp.Models
         public IList<Comment> Comments { get; set; }
 
         public AppUser Owner { get; set; }
-
-        // pitanje ogranicenja donjih kardinaliteta, ono nullable??
-
+  
         [ForeignKey("Owner")] // ??? pitati
         public int OwnerId { get; set; }
 
@@ -45,6 +47,12 @@ namespace BookingApp.Models
 
         [ForeignKey("AccomodationType")]
         public int AccomodationTypeId { get; set; }
+
+        public Accomodation()
+        {
+            this.Comments = new List<Comment>();
+            this.Rooms = new List<Room>();
+        }
 
     }
 }

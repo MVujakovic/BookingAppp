@@ -34,7 +34,9 @@ namespace BookingApp.Migrations
                         AccomodationTypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AccommodationTypes", t => t.AccomodationTypeId, cascadeDelete: true)
+                // ovo ogranicenje treba da znaci da ako izbrisem tip akomodacije, da se brisu i sve akomodacije sa tim tipom
+                .ForeignKey("dbo.AccommodationTypes", t => t.AccomodationTypeId, cascadeDelete: true) 
+
                 .ForeignKey("dbo.AppUsers", t => t.OwnerId, cascadeDelete: true)
                 .ForeignKey("dbo.Places", t => t.PlaceId, cascadeDelete: true)
                 .Index(t => t.PlaceId)
@@ -110,6 +112,7 @@ namespace BookingApp.Migrations
                         CountryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
+                // ovo proveriti da li radi kako treba. dakle ako izbrisem country, brisu se i regioni sa tom country
                 .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: true)
                 .Index(t => t.CountryId);
             
