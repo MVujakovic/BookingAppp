@@ -27,7 +27,7 @@ namespace BookingApp.Controllers
 
         // GET: api/Comments/5
         [HttpGet]
-        [Route("Comment/{id}")]
+        [Route("Comments/{id}")]
         [ResponseType(typeof(Comment))]
         public IHttpActionResult GetComment(int id)
         {
@@ -42,7 +42,7 @@ namespace BookingApp.Controllers
 
         // PUT: api/Comments/5
         [HttpPut]
-        [Route("CommentMod/{id}")]
+        [Route("CommentsMod/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutComment(int id, Comment comment)
         {

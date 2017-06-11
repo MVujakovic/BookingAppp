@@ -43,6 +43,7 @@ namespace BookingApp.Models
 
         public IList<Room> Rooms { get; set; }
 
+        [Required]
         public AccommodationType AccomodationType { get; set; }
 
         [ForeignKey("AccomodationType")]

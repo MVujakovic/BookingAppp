@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace BookingApp.Controllers
 {
@@ -17,9 +19,37 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+
+        //User manager -> We will use it to check role if needed.
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set { _userManager = value; }
+        }
+
+
+        /*
+         IdentityResult result = UserManager.Create(usr);
+            await UserManager.AddToRoleAsync(usr.Id, "User");
+
+             if (!result.Succeeded)
+            {
+                return BadRequest();
+            }
+        */
+
+
+
+
         // GET: api/AppUsers
         [HttpGet]
         [Route("AppUsers")]
+        [Authorize(Roles="Admin")] // provera da li je role admin
         public IQueryable<AppUser> GetAppUsers()
         {
             return db.AppUsers;
@@ -27,22 +57,35 @@ namespace BookingApp.Controllers
 
         // GET: api/AppUsers/5
         [HttpGet]
-        [Route("AppUser/{id}")]
+        [Route("AppUsers/{id}")]
         [ResponseType(typeof(AppUser))]
         public IHttpActionResult GetAppUser(int id)
         {
-            AppUser appUser = db.AppUsers.Find(id);
-            if (appUser == null)
+
+            // User.Identity.Name => Username (Identity User-a)! UserManager trazi po njegovom username-u, i onda poredi! 
+            bool isAdmin = UserManager.IsInRole(User.Identity.Name, "Admin");
+
+            // Vadimo iz Identity baze po username-u Identity User-a, koji u sebi sadrzi AppUser-a!
+            // User je current principal associated with request
+            var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+
+            // Ako korisnik nije admin, i nije AppUser koji trazi podatke o sebi, nije autorizovan!
+            if (isAdmin || (user != null && user.appUserId.Equals(id)))
             {
-                return NotFound();
+                AppUser appUser = db.AppUsers.Find(id);
+                if (appUser == null)
+                {
+                    return NotFound();
+                }
+                return Ok(appUser);
             }
 
-            return Ok(appUser);
+            return Unauthorized();         
         }
 
         // PUT: api/AppUsers/5
         [HttpPut]
-        [Route("AppUserMod/{id}")]
+        [Route("AppUsersMod/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAppUser(int id, AppUser appUser)
         {
@@ -79,7 +122,7 @@ namespace BookingApp.Controllers
 
         // POST: api/AppUsers
         [HttpPost]
-        [Route("AppUserPost")]
+        [Route("AppUsersPost")]
         [ResponseType(typeof(AppUser))]
         public IHttpActionResult PostAppUser(AppUser appUser)
         {
@@ -96,7 +139,7 @@ namespace BookingApp.Controllers
 
         // DELETE: api/AppUsers/5
         [HttpDelete]
-        [Route("AppUserDelete/{id}")]
+        [Route("AppUsersDelete/{id}")]
         [ResponseType(typeof(AppUser))]
         public IHttpActionResult DeleteAppUser(int id)
         {

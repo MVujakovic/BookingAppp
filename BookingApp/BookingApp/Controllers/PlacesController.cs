@@ -22,16 +22,17 @@ namespace BookingApp.Controllers
         [Route("Places")]
         public IQueryable<Place> GetPlaces()
         {
-            return db.Places;
+            return db.Places.Include("Accomodations");
         }
 
         // GET: api/Places/5
         [HttpGet]
-        [Route("Place/{id}")]
+        [Route("Places/{id}")]
         [ResponseType(typeof(Place))]
         public IHttpActionResult GetPlace(int id)
         {
-            Place place = db.Places.Find(id);
+            Place place = db.Places.Include("Accomodations").FirstOrDefault(p=>p.Id==id);
+                                   
             if (place == null)
             {
                 return NotFound();
@@ -42,7 +43,7 @@ namespace BookingApp.Controllers
 
         // PUT: api/Places/5
         [HttpPut]
-        [Route("PlaceMod/{id}")]
+        [Route("PlacesMod/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPlace(int id, Place place)
         {
@@ -79,7 +80,7 @@ namespace BookingApp.Controllers
 
         // POST: api/Places
         [HttpPost]
-        [Route("PlacePost")]
+        [Route("PlacesPost")]
         [ResponseType(typeof(Place))]
         public IHttpActionResult PostPlace(Place place)
         {
@@ -96,7 +97,7 @@ namespace BookingApp.Controllers
 
         // DELETE: api/Places/5
         [HttpDelete]
-        [Route("PlaceDelete/{id}")]
+        [Route("PlacesDelete/{id}")]
         [ResponseType(typeof(Place))]
         public IHttpActionResult DeletePlace(int id)
         {
