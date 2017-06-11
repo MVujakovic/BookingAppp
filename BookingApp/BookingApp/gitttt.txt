@@ -53,3 +53,6 @@ kada dodajemo entitete prvo dodamo nezavisa, pa save changes
 
 -- korisnooo za vracanje baze u stanje Initial
 Update-database -TargetMigration:name
+
+git stash filename
+git stash pop
