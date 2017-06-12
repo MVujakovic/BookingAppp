@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,23 +19,23 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         [HttpGet]
-        [Route("Countries")]
+        [Route("Countries", Name ="CountryController")]
         public IQueryable<Country> m1()
         {
-            List<Country> con = new List<Country>();
-            Country c = new Country();
-            c.Id = 1;
-            c.Name = "Srbija";
-            c.Regions = new List<Region>();
-            Country c2 = new Country();
-            c2.Id = 2;
-            c2.Name = "Crna Gora";
-            c2.Regions = new List<Region>();
-            con.Add(c);
-            con.Add(c2);
-            return con.AsQueryable();
+            //List<Country> con = new List<Country>();
+            //Country c = new Country();
+            //c.Id = 1;
+            //c.Name = "Srbija";
+            //c.Regions = new List<Region>();
+            //Country c2 = new Country();
+            //c2.Id = 2;
+            //c2.Name = "Crna Gora";
+            //c2.Regions = new List<Region>();
+            //con.Add(c);
+            //con.Add(c2);
+            //return con.AsQueryable();
 
-            //return db.Countries;
+            return db.Countries;
         }
 
         [HttpGet]
@@ -96,10 +98,26 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            //try
+            //{
             db.Countries.Add(country);
             db.SaveChanges();
+            //}
+            //catch (DbEntityValidationException ex)
+            //{
+            //    var errorMessages = ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage);
+            //    var fullErrorMessage = string.Join("; ", errorMessages);
+            //    var exceptionMessage = string.Concat(ex.Message, " The validation errors are: \n\t", fullErrorMessage);
 
-            return CreatedAtRoute("DefaultApi", new { id = country.Id }, country);
+            //    Debug.Print(exceptionMessage);
+
+            //    //throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+
+            //}
+
+
+
+            return CreatedAtRoute("CountryController", new { id = country.Id }, country);
         }
 
         [HttpDelete]
