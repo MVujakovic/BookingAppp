@@ -43,9 +43,6 @@ namespace BookingApp.Controllers
             }
         */
 
-
-
-
         // GET: api/AppUsers
         [HttpGet]
         [Route("AppUsers")]

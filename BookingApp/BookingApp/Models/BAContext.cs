@@ -32,7 +32,7 @@ namespace BookingApp.Models
         {
             // proveriti kako ovo radi
             // teoretski bi trebalo da se izbrise baza, i napravi nova, ako su menjane model klase
-            Database.SetInitializer<BAContext>(new DropCreateDatabaseIfModelChanges<BAContext>());
+            //Database.SetInitializer<BAContext>(new DropCreateDatabaseIfModelChanges<BAContext>());
 
             return new BAContext();
         }
