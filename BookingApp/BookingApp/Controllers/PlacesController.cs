@@ -18,9 +18,18 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         // GET: api/Places
-        [HttpGet]
-        [Route("Places")]
+        [HttpGet] //Ne znam mogu li da include i region i accomodations istovremeno???
+        [Route("Places", Name ="PlacesController")]
         public IQueryable<Place> GetPlaces()
+        {
+            return db.Places.Include("Region");
+            //return db.Places.Include("Accomodations");
+        }
+
+        // GET: api/Places
+        [HttpGet]
+        [Route("Places2", Name = "PlacesController2")] //Ne znam moze li se zvati PlacesController2, mada mozda mi to ni ne treba
+        public IQueryable<Place> GetPlaces2()
         {
             return db.Places.Include("Accomodations");
         }
@@ -92,7 +101,7 @@ namespace BookingApp.Controllers
             db.Places.Add(place);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = place.Id }, place);
+            return CreatedAtRoute("PlacesController", new { id = place.Id }, place);
         }
 
         // DELETE: api/Places/5

@@ -19,10 +19,11 @@ namespace BookingApp.Controllers
 
         // GET: api/Regions
         [HttpGet]
-        [Route("Regions")]
+        [Route("Regions", Name ="RegionsController")]
         public IQueryable<Region> GetRegions()
         {
-            return db.Regions;
+            //return db.Regions;
+            return db.Regions.Include("Country");
         }
 
         // GET: api/Regions/5
@@ -91,7 +92,7 @@ namespace BookingApp.Controllers
             db.Regions.Add(region);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = region.Id }, region);
+            return CreatedAtRoute("RegionsController", new { id = region.Id }, region);
         }
 
         // DELETE: api/Regions/5

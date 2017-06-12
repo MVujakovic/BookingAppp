@@ -22,20 +22,8 @@ namespace BookingApp.Controllers
         [Route("Countries", Name ="CountryController")]
         public IQueryable<Country> m1()
         {
-            //List<Country> con = new List<Country>();
-            //Country c = new Country();
-            //c.Id = 1;
-            //c.Name = "Srbija";
-            //c.Regions = new List<Region>();
-            //Country c2 = new Country();
-            //c2.Id = 2;
-            //c2.Name = "Crna Gora";
-            //c2.Regions = new List<Region>();
-            //con.Add(c);
-            //con.Add(c2);
-            //return con.AsQueryable();
-
             return db.Countries;
+            //return db.Countries.Include("Regions");
         }
 
         [HttpGet]
