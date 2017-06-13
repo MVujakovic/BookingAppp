@@ -10,12 +10,13 @@ using System.Web.Http.Description;
 
 namespace BookingApp.Controllers
 {
+    [RoutePrefix("api")]
     public class AccommodationTypeController : ApiController
     {
         private BAContext db = new BAContext();
 
         [HttpGet]
-        [Route("AccomodationTypes")]
+        [Route("AccomodationTypes",Name = "AccommodationTypeController")]
         public IQueryable<AccommodationType> m1()
         {
             return db.AccomodationTypes;
@@ -34,7 +35,7 @@ namespace BookingApp.Controllers
         }
 
         [HttpPut]
-        [Route("AccomodationType/{id}")]
+        [Route("AccomodationTypeMod/{id}")]
         public IHttpActionResult m2(int id, AccommodationType at)
         {
             if (!ModelState.IsValid)
@@ -70,7 +71,7 @@ namespace BookingApp.Controllers
         }
 
         [HttpPost]
-        [Route("AccomodationType")]
+        [Route("AccomodationTypePost")]
         [ResponseType(typeof(AccommodationType))]
         public IHttpActionResult m4(AccommodationType at)
         {
@@ -82,11 +83,11 @@ namespace BookingApp.Controllers
             db.AccomodationTypes.Add(at);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = at.Id }, at);
+            return CreatedAtRoute("AccommodationTypeController", new { id = at.Id }, at);
         }
 
         [HttpDelete]
-        [Route("AccommodationType/{id}")]
+        [Route("AccommodationTypeDelete/{id}")]
         [ResponseType(typeof(AccommodationType))]
         public IHttpActionResult m5(int id)
         {
