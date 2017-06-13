@@ -25,6 +25,14 @@ namespace BookingApp.Controllers
             return db.Accomodations;
         }
 
+        // GET: api/Accomodations2
+        [HttpGet]
+        [Route("Accomodations2", Name = "AccomodationsController2")]
+        public IQueryable<Accomodation> GetAccomodationsWithRooms()
+        {
+            return db.Accomodations.Include("Rooms");
+        }
+
         // GET: api/Accomodations/5
         [HttpGet]
         [Route("Accomodations/{id}")]

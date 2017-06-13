@@ -11,6 +11,7 @@ using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
 using BookingApp.Models;
+using System.Web.Http.Description;
 
 namespace BookingApp.OData
 {
@@ -31,11 +32,14 @@ namespace BookingApp.OData
     builder.EntitySet<Room>("Rooms"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class AccomodationsController : ODataController
+    [RoutePrefix("api")]
+    public class AccomodationsODataController : ODataController
     {
         private BAContext db = new BAContext();
 
         // GET: odata/Accomodations
+        [HttpGet]
+        [Route("AccomodationsOData", Name = "AccomodationsODataController")]
         [EnableQuery]
         public IQueryable<Accomodation> GetAccomodations()
         {
@@ -43,6 +47,8 @@ namespace BookingApp.OData
         }
 
         // GET: odata/Accomodations(5)
+        [HttpGet]
+        [Route("AccomodationsOData/{id}")]
         [EnableQuery]
         public SingleResult<Accomodation> GetAccomodation([FromODataUri] int key)
         {
@@ -50,6 +56,9 @@ namespace BookingApp.OData
         }
 
         // PUT: odata/Accomodations(5)
+        [HttpPut]
+        [Route("AccomodationsModOData/{id}")]
+        [ResponseType(typeof(void))]
         public IHttpActionResult Put([FromODataUri] int key, Delta<Accomodation> patch)
         {
             Validate(patch.GetEntity());
@@ -87,6 +96,9 @@ namespace BookingApp.OData
         }
 
         // POST: odata/Accomodations
+        [HttpPost]
+        [Route("AccomodationsPostOData")]
+        [ResponseType(typeof(Accomodation))]
         public IHttpActionResult Post(Accomodation accomodation)
         {
             if (!ModelState.IsValid)
@@ -139,6 +151,9 @@ namespace BookingApp.OData
         }
 
         // DELETE: odata/Accomodations(5)
+        [HttpDelete]
+        [Route("AccomodationDeleteOData/{id}")]
+        [ResponseType(typeof(Accomodation))]
         public IHttpActionResult Delete([FromODataUri] int key)
         {
             Accomodation accomodation = db.Accomodations.Find(key);
