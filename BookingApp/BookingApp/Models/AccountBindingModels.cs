@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using System.Web.Security;
 
 namespace BookingApp.Models
 {
@@ -35,6 +36,18 @@ namespace BookingApp.Models
     public class RegisterBindingModel
     {
         [Required]
+        [Display(Name ="Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Lastname")]
+        public string Lastname { get; set; }
+
+        [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -48,6 +61,13 @@ namespace BookingApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        // nzn da li ovde treba da dodajemo role? msm kog tipa je user koji se registruje
+        // ako ne stavimo ovde nema gde drugde, a ovako ispada da svaki korisnik moze sam sebe da registruje kao admina i menadzera...
+        // mozda napraviti da samo admin ima funkcionalnost da dodaje nove admine i menadzere
+        [Required]
+        [Display(Name ="Role")]
+        public string Role { get; set; }
     }
 
     public class RegisterExternalBindingModel

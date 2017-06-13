@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using BookingApp.Models;
 using BookingApp.Providers;
 using BookingApp.Results;
+using System.Data.Entity.Migrations;
 
 namespace BookingApp.Controllers
 {
@@ -39,14 +40,8 @@ namespace BookingApp.Controllers
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
@@ -125,7 +120,7 @@ namespace BookingApp.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -258,9 +253,9 @@ namespace BookingApp.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -323,19 +318,37 @@ namespace BookingApp.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            BAContext context = new BAContext();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new BAIdentityUser() { UserName = model.Email, Email = model.Email };
+            AppUser _appUser = new AppUser(model.Name + " " + model.Lastname);
+            context.AppUsers.AddOrUpdate(a => a.FullName, _appUser);
+            ContextHelper.SaveChanges(context);
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            //var user = new BAIdentityUser() { UserName = model.Email, Email = model.Email };
+            var user = new BAIdentityUser(model.Username, model.Password, model.Email)
+            {               
+                appUserId = _appUser.Id
+            };
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
+            var userStore = new UserStore<BAIdentityUser>(context);
+            var userManager = new UserManager<BAIdentityUser>(userStore);
+            userManager.Create(user);
+            // proveriti ovde, ili na klijentu, da li je rola validna
+            userManager.AddToRole(user.Id, model.Role);
+
+            //IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+            // kako god napravila password, ovde pada, ne bude succeded, i nikad nije dobra sifra =.=
+            // treba napraviti ako ovde padne, da se onaj AppUser brise iz baze sto je napravljen gore
+            //if (!result.Succeeded)
+            //{
+            //    return GetErrorResult(result);
+            //}
 
             return Ok();
         }
@@ -368,7 +381,7 @@ namespace BookingApp.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

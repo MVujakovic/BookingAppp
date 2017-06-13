@@ -20,12 +20,22 @@ namespace BookingApp.Models
 
         public AppUser appUser { get; set; }
 
+        public BAIdentityUser() { }
+        public BAIdentityUser(string username, string password, string email)
+        {
+            this.Id = username + "Id";
+            this.UserName = username;
+            this.PasswordHash = HashPassword(password);
+            this.Email = email;
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<BAIdentityUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+           
             // Add custom user claims here
+
             return userIdentity;
         }
 
