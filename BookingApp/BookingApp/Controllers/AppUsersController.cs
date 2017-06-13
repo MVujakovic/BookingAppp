@@ -20,7 +20,7 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
 
-        //User manager -> We will use it to check role if needed.
+       // User manager -> We will use it to check role if needed.
         private ApplicationUserManager _userManager;
 
         public ApplicationUserManager UserManager
@@ -45,11 +45,32 @@ namespace BookingApp.Controllers
 
         // GET: api/AppUsers
         [HttpGet]
-        [Route("AppUsers")]
+        [Route("AppUsers",Name ="AppUsersController")]
         [Authorize(Roles="Admin")] // provera da li je role admin
         public IQueryable<AppUser> GetAppUsers()
         {
             return db.AppUsers;
+            //return db.AppUsers.Include("Comments");
+        }
+
+        // GET: api/AppUsers2
+        [HttpGet]
+        [Route("AppUsers2", Name = "AppUsersController2")]
+        [Authorize(Roles = "Admin")] // provera da li je role admin
+        public IQueryable<AppUser> GetAppUsers2()
+        {
+            //return db.AppUsers;
+            return db.AppUsers.Include("Accomodations");
+        }
+
+        // GET: api/AppUsers3
+        [HttpGet]
+        [Route("AppUsers3", Name = "AppUsersController3")]
+        [Authorize(Roles = "Admin")] // provera da li je role admin
+        public IQueryable<AppUser> GetAppUsers3()
+        {
+            //return db.AppUsers;
+            return db.AppUsers.Include("RoomReservations");
         }
 
         // GET: api/AppUsers/5
@@ -131,7 +152,7 @@ namespace BookingApp.Controllers
             db.AppUsers.Add(appUser);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = appUser.Id }, appUser);
+            return CreatedAtRoute("AppUsersController", new { id = appUser.Id }, appUser);
         }
 
         // DELETE: api/AppUsers/5
