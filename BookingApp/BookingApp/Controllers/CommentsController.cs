@@ -19,7 +19,7 @@ namespace BookingApp.Controllers
 
         // GET: api/Comments
         [HttpGet]
-        [Route("Comments")]
+        [Route("Comments", Name = "CommentsController")]
         public IQueryable<Comment> GetComments()
         {
             return db.Comments;
@@ -91,7 +91,7 @@ namespace BookingApp.Controllers
             db.Comments.Add(comment);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.Id }, comment);
+            return CreatedAtRoute("CommentsController", new { id = comment.Id }, comment);
         }
 
         // DELETE: api/Comments/5

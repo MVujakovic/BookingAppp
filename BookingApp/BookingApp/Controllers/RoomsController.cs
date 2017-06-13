@@ -12,14 +12,14 @@ using BookingApp.Models;
 
 namespace BookingApp.Controllers
 {
-    // zavrsiti ovaj kontroler....
+    [RoutePrefix("api")]
     public class RoomsController : ApiController
     {
         private BAContext db = new BAContext();
 
         // GET: api/Rooms
         [HttpGet]
-        [Route("Rooms")]
+        [Route("Rooms",Name = "RoomsController")]
         public IQueryable<Room> GetRooms()
         {
             return db.Rooms;
@@ -40,9 +40,9 @@ namespace BookingApp.Controllers
             return Ok(room);
         }
 
-        // PUT: api/Rooms/5
+        // PUT: api/RoomsMod/5
         [HttpPut]
-        [Route("Rooms/{id}")]
+        [Route("RoomsMod/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutRoom(int id, Room room)
         {
@@ -77,9 +77,9 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Rooms
+        // POST: api/RoomsPost
         [HttpPost]
-        [Route("Rooms")]
+        [Route("RoomsPost")]
         [ResponseType(typeof(Room))]
         public IHttpActionResult PostRoom(Room room)
         {
@@ -91,12 +91,12 @@ namespace BookingApp.Controllers
             db.Rooms.Add(room);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = room.Id }, room);
+            return CreatedAtRoute("RoomsController", new { id = room.Id }, room);
         }
 
-        // DELETE: api/Rooms/5
+        // DELETE: api/RoomsDelete/5
         [HttpDelete]
-        [Route("Rooms/{id}")]
+        [Route("RoomsDelete/{id}")]
         [ResponseType(typeof(Room))]
         public IHttpActionResult DeleteRoom(int id)
         {

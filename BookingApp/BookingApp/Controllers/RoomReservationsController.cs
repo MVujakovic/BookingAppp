@@ -19,7 +19,7 @@ namespace BookingApp.Controllers
 
         // GET: api/RoomReservations
         [HttpGet]
-        [Route("RoomReservations")]
+        [Route("RoomReservations",Name = "RoomReservationsController")]
         public IQueryable<RoomReservations> GetRoomReservations()
         {
             return db.RoomReservations;
@@ -91,7 +91,7 @@ namespace BookingApp.Controllers
             db.RoomReservations.Add(roomReservations);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = roomReservations.Id }, roomReservations);
+            return CreatedAtRoute("RoomReservationsController", new { id = roomReservations.Id }, roomReservations);
         }
 
         // DELETE: api/RoomReservations/5

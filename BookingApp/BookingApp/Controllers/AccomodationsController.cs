@@ -12,13 +12,14 @@ using BookingApp.Models;
 
 namespace BookingApp.Controllers
 {
+    [RoutePrefix("api")]
     public class AccomodationsController : ApiController
     {
         private BAContext db = new BAContext();
 
         // GET: api/Accomodations
         [HttpGet]
-        [Route("Accomodations")]
+        [Route("Accomodations",Name = "AccomodationsController")]
         public IQueryable<Accomodation> GetAccomodations()
         {
             return db.Accomodations;
@@ -39,9 +40,9 @@ namespace BookingApp.Controllers
             return Ok(accomodation);
         }
 
-        // PUT: api/Accomodations/5
+        // PUT: api/AccomodationsMod/5
         [HttpPut]
-        [Route("Accomodations/{id}")]
+        [Route("AccomodationsMod/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAccomodation(int id, Accomodation accomodation)
         {
@@ -76,9 +77,9 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Accomodations
+        // POST: api/AccomodationsPost
         [HttpPost]
-        [Route("Accomodations")]
+        [Route("AccomodationsPost")]
         [ResponseType(typeof(Accomodation))]
         public IHttpActionResult PostAccomodation(Accomodation accomodation)
         {
@@ -90,12 +91,12 @@ namespace BookingApp.Controllers
             db.Accomodations.Add(accomodation);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accomodation.Id }, accomodation);
+            return CreatedAtRoute("AccomodationsController", new { id = accomodation.Id }, accomodation);
         }
 
-        // DELETE: api/Accomodations/5
+        // DELETE: api/AccomodationsDelete/5
         [HttpDelete]
-        [Route("Accomodation/{id}")]
+        [Route("AccomodationDelete/{id}")]
         [ResponseType(typeof(Accomodation))]
         public IHttpActionResult DeleteAccomodation(int id)
         {
