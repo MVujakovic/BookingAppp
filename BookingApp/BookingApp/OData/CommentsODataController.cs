@@ -11,6 +11,7 @@ using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
 using BookingApp.Models;
+using System.Web.Http.Description;
 
 namespace BookingApp.OData
 {
@@ -26,11 +27,15 @@ namespace BookingApp.OData
     builder.EntitySet<AppUser>("AppUsers"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class CommentsController : ODataController
+
+    [RoutePrefix("api")]
+    public class CommentsODataController : ODataController
     {
         private BAContext db = new BAContext();
 
         // GET: odata/Comments
+        [HttpGet]
+        [Route("CommentsOData", Name = "CommentsODataController")]
         [EnableQuery]
         public IQueryable<Comment> GetComments()
         {
@@ -38,6 +43,9 @@ namespace BookingApp.OData
         }
 
         // GET: odata/Comments(5)
+        [HttpGet]
+        [Route("CommentsOData/{id}")]
+        [ResponseType(typeof(Comment))]
         [EnableQuery]
         public SingleResult<Comment> GetComment([FromODataUri] int key)
         {
@@ -45,6 +53,9 @@ namespace BookingApp.OData
         }
 
         // PUT: odata/Comments(5)
+        [HttpPut]
+        [Route("CommentsODataMod/{id}")]
+        [ResponseType(typeof(void))]
         public IHttpActionResult Put([FromODataUri] int key, Delta<Comment> patch)
         {
             Validate(patch.GetEntity());
@@ -82,6 +93,9 @@ namespace BookingApp.OData
         }
 
         // POST: odata/Comments
+        [HttpPost]
+        [Route("CommentODataPost")]
+        [ResponseType(typeof(Comment))]
         public IHttpActionResult Post(Comment comment)
         {
             if (!ModelState.IsValid)
@@ -134,6 +148,9 @@ namespace BookingApp.OData
         }
 
         // DELETE: odata/Comments(5)
+        [HttpDelete]
+        [Route("CommentODataDelete/{id}")]
+        [ResponseType(typeof(Comment))]
         public IHttpActionResult Delete([FromODataUri] int key)
         {
             Comment comment = db.Comments.Find(key);

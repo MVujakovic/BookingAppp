@@ -22,7 +22,8 @@ namespace BookingApp.Controllers
         [Route("Comments", Name = "CommentsController")]
         public IQueryable<Comment> GetComments()
         {
-            return db.Comments;
+            //return db.Comments;
+            return db.Comments.Include("Accomodation"); //da se prikaze i accomodation kom priprada komentar
         }
 
         // GET: api/Comments/5
