@@ -22,7 +22,8 @@ namespace BookingApp.Controllers
         [Route("RoomReservations",Name = "RoomReservationsController")]
         public IQueryable<RoomReservations> GetRoomReservations()
         {
-            return db.RoomReservations;
+            //return db.RoomReservations;
+            return db.RoomReservations.Include("AppUser");
         }
 
         // GET: api/RoomReservations/5
