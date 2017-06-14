@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -27,17 +28,27 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         [Route("Country/{id}")]
         [ResponseType(typeof(Country))]
         public IHttpActionResult m2(int id)
         {
-            Country country = db.Countries.Find(id);
+            //Country country = db.Countries.Find(id);
+            Country country = db.Countries.Where(c => c.Id == id).Include("Regions").SingleOrDefault();
+
             if (country == null)
             {
                 return NotFound();
             }
 
             return Ok(country);
+        }
+
+        // GET: api/Countries(5)/Regions
+        [EnableQuery]
+        public IQueryable<Region> GetRegions([FromODataUri] int key)
+        {
+            return db.Countries.Where(m => m.Id == key).SelectMany(m => m.Regions);
         }
 
         [HttpPut]

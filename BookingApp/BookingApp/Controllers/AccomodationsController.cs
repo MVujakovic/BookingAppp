@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -35,11 +36,13 @@ namespace BookingApp.Controllers
 
         // GET: api/Accomodations/5
         [HttpGet]
-        [Route("Accomodations/{id}")]
+        [EnableQuery]
+        [Route("Accomodation/{id}")]
         [ResponseType(typeof(Accomodation))]
         public IHttpActionResult GetAccomodation(int id)
         {
-            Accomodation accomodation = db.Accomodations.Find(id);
+            Accomodation accomodation = db.Accomodations.Where(a => a.Id == id).Include("Rooms").SingleOrDefault();
+            //Accomodation accomodation = db.Accomodations.Find(id);
             if (accomodation == null)
             {
                 return NotFound();

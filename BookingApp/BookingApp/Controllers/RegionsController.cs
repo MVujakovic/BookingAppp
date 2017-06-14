@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -28,11 +29,13 @@ namespace BookingApp.Controllers
 
         // GET: api/Regions/5
         [HttpGet]
+        [EnableQuery]
         [Route("Region/{id}")]
         [ResponseType(typeof(Region))]
         public IHttpActionResult GetRegion(int id)
         {
-            Region region = db.Regions.Find(id);
+            Region region = db.Regions.Where(r => r.Id == id).Include("Places").SingleOrDefault();
+            //Region region = db.Regions.Find(id);
             if (region == null)
             {
                 return NotFound();
