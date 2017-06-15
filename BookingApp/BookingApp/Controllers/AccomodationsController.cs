@@ -34,6 +34,14 @@ namespace BookingApp.Controllers
             return db.Accomodations.Include("Rooms");
         }
 
+        [HttpGet]
+        [EnableQuery]
+        [Route("AccomodationsByOwnerId/{id}")]
+        public IQueryable<Accomodation> GetAccomodationByOwnerId(int id)
+        {
+            return db.Accomodations.Where(a => a.OwnerId == id);
+        }
+
         // GET: api/Accomodations/5
         [HttpGet]
         [EnableQuery]
@@ -50,6 +58,8 @@ namespace BookingApp.Controllers
 
             return Ok(accomodation);
         }
+
+        
 
         // PUT: api/AccomodationsMod/5
         [HttpPut]
