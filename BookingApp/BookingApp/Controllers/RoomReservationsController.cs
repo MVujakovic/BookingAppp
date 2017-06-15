@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -24,6 +25,46 @@ namespace BookingApp.Controllers
         {
             //return db.RoomReservations;
             return db.RoomReservations.Include("AppUser");
+        }
+
+        [HttpGet]
+        [EnableQuery]
+        [Route("RoomResByUserId/{id}")]
+        public IQueryable<Accomodation> GetAccomodation(int id)
+        {
+            List<RoomReservations> roomRes = db.RoomReservations.Where(r => r.AppUserId == id).Include("Room").ToList();
+            List<Room> rooms = new List<Room>();
+            List<Accomodation> accomodations = new List<Accomodation>();
+            List<int> accIds = new List<int>();
+            foreach (RoomReservations res in roomRes)
+            {
+                if (res.EndDate < DateTime.Now)
+                {
+                    rooms.Add(db.Rooms.Where(r => r.Id == res.RoomId).Include("Accomodation").SingleOrDefault());
+                }             
+            }
+
+            if (rooms.Count == 0)
+            {
+                IQueryable<Accomodation> ret = Enumerable.Empty<Accomodation>().AsQueryable();
+                return ret;
+            }
+            else
+            {
+                foreach (Room ro in rooms)
+                {
+                    accomodations.Add(db.Accomodations.Where(a => a.Id == ro.AccomodationId).SingleOrDefault());
+                }
+
+                foreach (Accomodation a in accomodations)
+                {
+                    accIds.Add(a.Id);
+                }
+
+                return db.Accomodations.Where(a => accIds.Contains(a.Id));
+            }
+
+            
         }
 
         // GET: api/RoomReservations/5
