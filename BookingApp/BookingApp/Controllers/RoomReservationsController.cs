@@ -40,7 +40,7 @@ namespace BookingApp.Controllers
             {
                 if (res.EndDate < DateTime.Now)
                 {
-                    rooms.Add(db.Rooms.Where(r => r.Id == res.RoomId).Include("Accomodation").SingleOrDefault());
+                    rooms.Add(db.Rooms.Where(r => r.Id == res.RoomId ).Include("Accomodation").SingleOrDefault());
                 }             
             }
 
