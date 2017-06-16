@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -24,6 +25,14 @@ namespace BookingApp.Controllers
         {
             //return db.Comments;
             return db.Comments.Include("Accomodation"); //da se prikaze i accomodation kom priprada komentar
+        }
+
+        [HttpGet]
+        [EnableQuery]
+        [Route("CommentsByUserId/{id}")]
+        public IQueryable<Comment> GetCommentsByUserId(int id)
+        {
+            return db.Comments.Where(c => c.AppUserId == id).Include("AppUser").Include("Accomodation");
         }
 
         // GET: api/Comments/5
