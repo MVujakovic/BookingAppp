@@ -106,6 +106,8 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
+
         // POST: api/AccomodationsPost
         [HttpPost]
         [Route("AccomodationsPost")]
