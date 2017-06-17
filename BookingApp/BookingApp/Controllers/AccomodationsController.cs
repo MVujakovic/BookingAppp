@@ -42,6 +42,14 @@ namespace BookingApp.Controllers
             return db.Accomodations.Where(a => a.OwnerId == id);
         }
 
+        [HttpGet]
+        [EnableQuery]
+        [Route("AccomodationsByGrade/{id}")]
+        public IQueryable<Accomodation> GetAccomodationByGrade(int id)
+        {
+            return db.Accomodations.Where(a => (a.AverageGrade <= id && a.AverageGrade >= (id - 1))).Include("Rooms");
+        }
+
         // GET: api/Accomodations/5
         [HttpGet]
         [EnableQuery]
@@ -97,6 +105,8 @@ namespace BookingApp.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
+
 
         // POST: api/AccomodationsPost
         [HttpPost]
