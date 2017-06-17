@@ -46,6 +46,8 @@ namespace BookingApp.Providers
             var userRole = user.Roles.FirstOrDefault();
             var role = db.Roles.SingleOrDefault(r => r.Id == userRole.RoleId);
             var roleName = role?.Name;
+            var id = user.appUserId;
+            context.OwinContext.Response.Headers.Add("Id", new[] { id.ToString() });
 
             if (roleName == "Admin")
             {
@@ -62,8 +64,8 @@ namespace BookingApp.Providers
 
             //Mora se dodati u header response-a kako bi se se Role atribut
             //mogao procitati na klijentskoj strani
-            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Role" });
-
+            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Role","Id" });
+            
 
             //if (!user.EmailConfirmed)
             //{
@@ -71,7 +73,9 @@ namespace BookingApp.Providers
             //    return;
             //}
 
-            // ovde dodati ono da se dodaje u rolu
+           // select UserId as 'AspNetUserRoles.UserId',RoleId as'AspNetUserRoles.RoleId',AspNetRoles.Name as 'AspNetRoles.roleName', appUserId as 'AspNetUsers.appUserId', UserName
+           // from AspNetUserRoles, AspNetRoles, AspNetUsers where AspNetRoles.Id = AspNetUserRoles.RoleId and AspNetUsers.Id = AspNetUserRoles.UserId
+
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
 

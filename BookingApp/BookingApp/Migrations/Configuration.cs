@@ -288,7 +288,14 @@ namespace BookingApp.Migrations
             var accoms = new List<Accomodation>()
             {
                 // novi sad
-                new Accomodation(){ Name="Hotel Park", AccomodationTypeId=accTypes[0].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId},
+                new Accomodation()
+                {
+                    Name ="Hotel Park",
+                    AccomodationTypeId =accTypes[0].Id,PlaceId=places[1].Id,
+                    OwnerId =owner.appUserId,
+                    //ImageUrl="~/Images/hotelPark.jpg"
+                    ImageUrl="hotelPark.jpg"
+                },
                 new Accomodation(){ Name="Hotel Prezident", AccomodationTypeId=accTypes[0].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId},
 
                 new Accomodation(){ Name="City Hostel", AccomodationTypeId=accTypes[1].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId},
