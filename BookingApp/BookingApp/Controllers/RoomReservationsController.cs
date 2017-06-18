@@ -29,6 +29,41 @@ namespace BookingApp.Controllers
 
         [HttpGet]
         [EnableQuery]
+        [Route("AccRoomRes/{id}")]
+        public IQueryable<Accomodation> GetAccomodations(int id)
+        {
+            List<RoomReservations> roomRes = db.RoomReservations.Where(r => r.AppUserId == id).Include("Room").ToList();
+            List<Room> rooms = new List<Room>();
+            List<Accomodation> accomodations = new List<Accomodation>();
+            List<int> accIds = new List<int>();
+            foreach (RoomReservations res in roomRes)
+            {
+                rooms.Add(db.Rooms.Where(r => r.Id == res.RoomId).Include("Accomodation").SingleOrDefault());
+            }
+
+            if (rooms.Count == 0)
+            {
+                IQueryable<Accomodation> ret = Enumerable.Empty<Accomodation>().AsQueryable();
+                return ret;
+            }
+            else
+            {
+                foreach (Room ro in rooms)
+                {
+                    accomodations.Add(db.Accomodations.Where(a => a.Id == ro.AccomodationId).SingleOrDefault());
+                }
+
+                foreach (Accomodation a in accomodations)
+                {
+                    accIds.Add(a.Id);
+                }
+
+                return db.Accomodations.Where(a => accIds.Contains(a.Id));
+            }
+        }
+
+        [HttpGet]
+        [EnableQuery]
         [Route("RoomResByUserId/{id}")]
         public IQueryable<Accomodation> GetAccomodation(int id)
         {
