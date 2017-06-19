@@ -23,7 +23,7 @@ namespace BookingApp.Controllers
         [Route("Accomodations",Name = "AccomodationsController")]
         public IQueryable<Accomodation> GetAccomodations()
         {
-            return db.Accomodations;
+            return db.Accomodations.Include("Place");
         }
 
         // GET: api/Accomodations2
@@ -67,7 +67,33 @@ namespace BookingApp.Controllers
             return Ok(accomodation);
         }
 
-        
+        [HttpGet]
+        [EnableQuery]
+        [Route("AccomodationReservationsByUser/{id}/{id2}")]
+        public IQueryable<RoomReservations> GetRoomReservations(int id,int id2)
+        {
+            Accomodation acc = db.Accomodations.Where(a => a.Id == id).Include("Rooms").SingleOrDefault();
+            //List<Room> rooms = new List<Room>();
+            List<int> roomRes = new List<int>();
+            List<RoomReservations> reservations = new List<RoomReservations>();
+            reservations = db.RoomReservations.Where(ro => ro.AppUserId == id2).ToList();
+
+            foreach (Room r in acc.Rooms)
+            {
+                foreach(RoomReservations rr in reservations)
+                {
+                    if (rr.RoomId == r.Id)
+                    {
+                        roomRes.Add(rr.Id);
+                    }
+                }
+            }
+
+            
+
+            return db.RoomReservations.Where(a => roomRes.Contains(a.Id));
+        }
+
 
         // PUT: api/AccomodationsMod/5
         [HttpPut]
@@ -85,7 +111,7 @@ namespace BookingApp.Controllers
                 return BadRequest();
             }
 
-            db.Entry(accomodation).State = EntityState.Modified;
+            db.Entry(accomodation).State = System.Data.Entity.EntityState.Modified;
 
             try
             {

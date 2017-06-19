@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
 using System.Web.Http.OData;
+using System.Data.Entity.Migrations;
 
 namespace BookingApp.Controllers
 {
@@ -66,7 +67,11 @@ namespace BookingApp.Controllers
                 return BadRequest();
             }
 
-            db.Entry(comment).State = EntityState.Modified;
+            //db.Entry(comment).State = EntityState.Modified;
+
+            db.Comments.AddOrUpdate(comment);
+            ContextHelper.SaveChanges(db);
+            //db.SaveChanges();
 
             try
             {

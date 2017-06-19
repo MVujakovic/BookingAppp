@@ -60,7 +60,7 @@ namespace BookingApp.Controllers
                 return BadRequest();
             }
 
-            db.Entry(region).State = EntityState.Modified;
+            db.Entry(region).State = System.Data.Entity.EntityState.Modified;
 
             try
             {
