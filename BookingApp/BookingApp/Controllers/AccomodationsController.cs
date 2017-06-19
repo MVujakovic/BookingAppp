@@ -151,6 +151,140 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("AccomodationsController", new { id = accomodation.Id }, accomodation);
         }
 
+
+        // METODA UBICA!!! 
+
+        //// srediti metodu, dodati try-catch  http://www.c-sharpcorner.com/article/uploading-image-to-server-using-web-api-2-0/
+        //// POST: api/AccomodationsPost
+        //[HttpPost]
+        //[Route("AccomodationsPost")]
+        //[ResponseType(typeof(Accomodation))]
+        //public IHttpActionResult PostAccomodation(Accomodation accomodation)
+        //{
+        //    Accomodation accommodation = new Accomodation();
+
+        //    // Check if the request contains multipart/form-data. // za debug mi ovo treba
+        //    if (!Request.Content.IsMimeMultipartContent())
+        //    {
+        //        //throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var user = db.Users.FirstOrDefault(u => u.UserName.Equals(User.Identity.Name));
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    //    var userRole = user.Roles.First().RoleId;
+        //    //    var role = BAContext.Roles.FirstOrDefault(r => r.Id == userRole);
+        //    //    AppUser appUser = BAContext.AppUsers.Where(au => au.Id == user.appUserId).FirstOrDefault();
+
+        //    var httpRequest = HttpContext.Current.Request;
+        //    try
+        //    {
+        //        accommodation = JsonConvert.DeserializeObject<Accomodation>(httpRequest.Form[0]);
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        Console.Write(e.Message);
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    foreach (string file in httpRequest.Files)
+        //    {
+        //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+
+        //        var postedFile = httpRequest.Files[file];
+        //        if (postedFile != null && postedFile.ContentLength > 0)
+        //        {
+
+        //            IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".jpeg" };
+        //            var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+        //            var extension = ext.ToLower();
+        //            if (!AllowedFileExtensions.Contains(extension))
+        //            {
+        //                return BadRequest();
+        //            }
+        //            else
+        //            {
+        //                var filePath = HttpContext.Current.Server.MapPath("~/Content/Images/" + postedFile.FileName);
+        //                accommodation.ImageUrl = "Content/Images/" + postedFile.FileName;
+        //                postedFile.SaveAs(filePath);
+        //            }
+        //        }
+        //    }
+
+        //    db.Accomodations.Add(accomodation);
+        //    //ContextHelper.SaveChanges(db);        
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbEntityValidationException)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+
+        //    //foreach (string file in httpRequest.Files)
+        //    //{
+        //    //    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+
+
+        //    //    var postedFile = httpRequest.Files[file];
+        //    //    if (postedFile != null && postedFile.ContentLength > 0)
+        //    //    {
+
+        //    //        //int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB 
+
+        //    //        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".jpeg" };
+        //    //        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+        //    //        var extension = ext.ToLower();
+
+        //    //        if (!AllowedFileExtensions.Contains(extension))
+        //    //        {
+        //    //            var message = string.Format("Please Upload image of type .jpg,.png,.jpeg");
+        //    //            return BadRequest(message);
+
+        //    //        }
+        //    //        /*
+        //    //        Object { message: "The request entity's media type 'multipart/form-data' 
+        //    //        is not supported for this resource.", exceptionMessage: 
+        //    //        "No MediaTypeFormatter is available to read an obje…om content with 
+        //    //        media type 'multipart/form-data'.", exceptionType.....
+        //    //       */
+        //    //        //else if (postedFile.ContentLength > MaxContentLength)
+        //    //        //{
+        //    //        //    var message = string.Format("Please Upload a file upto 1 mb.");
+        //    //        //    return BadRequest(message);
+        //    //        //}
+        //    //        else
+        //    //        {
+        //    //            var filePath = HttpContext.Current.Server.MapPath("~/Content/Images/" + postedFile.FileName);
+        //    //            //var filePath = HttpContext.Current.Server.MapPath("~/Content/Images/" + postedFile.FileName+extension);
+        //    //            accommodation.ImageUrl = "Content/Images/" + postedFile.FileName;
+        //    //            //accommodation.ImageUrl = "Content/Images/" + postedFile.FileName+extension;
+        //    //            postedFile.SaveAs(filePath);
+        //    //        }
+        //    //    }
+        //    //}
+
+
+
+        //    return CreatedAtRoute("AccomodationsController", new { id = accomodation.Id }, accomodation);
+        //}
+
+
         // DELETE: api/AccomodationsDelete/5
         [HttpDelete]
         [Route("AccomodationDelete/{id}")]

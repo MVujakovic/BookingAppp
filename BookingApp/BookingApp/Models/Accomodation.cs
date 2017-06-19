@@ -38,7 +38,7 @@ namespace BookingApp.Models
 
         public AppUser Owner { get; set; }
   
-        [ForeignKey("Owner")] // ??? pitati
+        [ForeignKey("Owner")] 
         public int OwnerId { get; set; }
 
         public IList<Room> Rooms { get; set; }

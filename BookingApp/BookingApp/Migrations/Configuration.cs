@@ -168,18 +168,18 @@ namespace BookingApp.Migrations
             // from AspNetUserRoles, AspNetRoles, AspNetUsers where AspNetRoles.Id = AspNetUserRoles.RoleId
             // and AspNetUsers.Id = AspNetUserRoles.UserId
 
-            _appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "Miljana Menadzerovic");
-            var BAIdUser = new BAIdentityUser("miki", "miki123", "miki@gmail.com") { appUserId = _appUser.Id };
-            userManager.Create(BAIdUser);
-            userManager.AddToRole(BAIdUser.Id, "Manager");
+            //_appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "Miljana Menadzerovic");
+            //var BAIdUser = new BAIdentityUser("miki", "miki123", "miki@gmail.com") { appUserId = _appUser.Id };
+            //userManager.Create(BAIdUser);
+            //userManager.AddToRole(BAIdUser.Id, "Manager");
 
-            _appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "Zvezdana Menadzerovic");
-            BAIdUser = new BAIdentityUser("zvezda", "zvezda123", "zvezda@gmail.com") { appUserId = _appUser.Id };
-            userManager.Create(BAIdUser);
-            userManager.AddToRole(BAIdUser.Id, "Manager");
+            //_appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "Zvezdana Menadzerovic");
+            //BAIdUser = new BAIdentityUser("zvezda", "zvezda123", "zvezda@gmail.com") { appUserId = _appUser.Id };
+            //userManager.Create(BAIdUser);
+            //userManager.AddToRole(BAIdUser.Id, "Manager");
 
 
-            ContextHelper.SaveChanges(context);
+            //ContextHelper.SaveChanges(context);
             #endregion
 
             #region Adding Countries, Regions and Places
@@ -295,7 +295,7 @@ namespace BookingApp.Migrations
                     OwnerId =owner.appUserId,
                     Latitude=45.26714,
                     Longitude=19.8,
-                    //ImageUrl="~/Images/hotelPark.jpg"
+                     //ImageUrl="~Content/Images/hotelPark.jpg"  // na ovoj lokaciji ce biti slike   
                     ImageUrl="hotelPark.jpg"
                 },
                 new Accomodation(){ Name="Hotel Prezident", AccomodationTypeId=accTypes[0].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId, Latitude=45.26714,Longitude=19.85},
