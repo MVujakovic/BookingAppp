@@ -23,7 +23,7 @@ namespace BookingApp.Controllers
         [Route("Accomodations",Name = "AccomodationsController")]
         public IQueryable<Accomodation> GetAccomodations()
         {
-            return db.Accomodations;
+            return db.Accomodations.Include("Place");
         }
 
         // GET: api/Accomodations2

@@ -293,27 +293,29 @@ namespace BookingApp.Migrations
                     Name ="Hotel Park",
                     AccomodationTypeId =accTypes[0].Id,PlaceId=places[1].Id,
                     OwnerId =owner.appUserId,
+                    Latitude=45.26714,
+                    Longitude=19.8,
                     //ImageUrl="~/Images/hotelPark.jpg"
                     ImageUrl="hotelPark.jpg"
                 },
-                new Accomodation(){ Name="Hotel Prezident", AccomodationTypeId=accTypes[0].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId},
+                new Accomodation(){ Name="Hotel Prezident", AccomodationTypeId=accTypes[0].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId, Latitude=45.26714,Longitude=19.85},
 
-                new Accomodation(){ Name="City Hostel", AccomodationTypeId=accTypes[1].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId},
+                new Accomodation(){ Name="City Hostel", AccomodationTypeId=accTypes[1].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId,Latitude=45.26714,Longitude=19.83355},
 
                 // karlovci
-                new Accomodation(){ Name="Premier Prezident", AccomodationTypeId=accTypes[0].Id,PlaceId=places[2].Id,OwnerId=owner.appUserId},
-                new Accomodation(){ Name="Apartman Zeravica", AccomodationTypeId=accTypes[2].Id,PlaceId=places[2].Id, OwnerId=owner.appUserId},
+                new Accomodation(){ Name="Premier Prezident", AccomodationTypeId=accTypes[0].Id,PlaceId=places[2].Id,OwnerId=owner.appUserId,Latitude=45.2025,Longitude=19.93444},
+                new Accomodation(){ Name="Apartman Zeravica", AccomodationTypeId=accTypes[2].Id,PlaceId=places[2].Id, OwnerId=owner.appUserId,Latitude=45.2025,Longitude=19.9},
 
                 // sidnej :) 
-                new Accomodation(){ Name="Hotel Hilton", AccomodationTypeId=accTypes[0].Id,PlaceId=places[5].Id, OwnerId=owner.appUserId},
-                new Accomodation(){ Name="The Glebe", AccomodationTypeId=accTypes[2].Id,PlaceId=places[5].Id, OwnerId=owner.appUserId},
+                new Accomodation(){ Name="Hotel Hilton", AccomodationTypeId=accTypes[0].Id,PlaceId=places[5].Id, OwnerId=owner.appUserId,Latitude=-33.86749,Longitude=151.20699},
+                new Accomodation(){ Name="The Glebe", AccomodationTypeId=accTypes[2].Id,PlaceId=places[5].Id, OwnerId=owner.appUserId,Latitude=-33.86749,Longitude=151},
 
                 // hamar
-                new Accomodation(){ Name="Iceland Air", AccomodationTypeId=accTypes[0].Id,PlaceId=places[7].Id, OwnerId=owner.appUserId},
-                new Accomodation(){ Name="Scandic Hamar", AccomodationTypeId=accTypes[0].Id,PlaceId=places[7].Id,OwnerId=owner.appUserId},
+                new Accomodation(){ Name="Iceland Air", AccomodationTypeId=accTypes[0].Id,PlaceId=places[7].Id, OwnerId=owner.appUserId,Latitude=60.79453,Longitude=11.06800},
+                new Accomodation(){ Name="Scandic Hamar", AccomodationTypeId=accTypes[0].Id,PlaceId=places[7].Id,OwnerId=owner.appUserId,Latitude=60.79453,Longitude=10.9},
 
                 // havana
-                new Accomodation(){ Name="Inglaterra Hotel", AccomodationTypeId=accTypes[0].Id,PlaceId=places[9].Id, OwnerId=owner.appUserId},
+                new Accomodation(){ Name="Inglaterra Hotel", AccomodationTypeId=accTypes[0].Id,PlaceId=places[9].Id, OwnerId=owner.appUserId,Latitude=23.11359,Longitude= -82.36660},
             };
 
             // ne moze na istom mestu dva smestaja da se isto zovu 
