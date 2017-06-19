@@ -30,6 +30,7 @@ namespace BookingApp.Providers
             var allowedOrigin = "*";
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Role", "Id", "Fullname", "Email" });
 
             ApplicationUserManager userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
@@ -49,6 +50,18 @@ namespace BookingApp.Providers
             var id = user.appUserId;
             context.OwinContext.Response.Headers.Add("Id", new[] { id.ToString() });
 
+            var appUser = db.AppUsers.Find(user.appUserId);
+            if (appUser != null)
+            {
+                context.OwinContext.Response.Headers.Add("Fullname", new[] { appUser.FullName });
+            }
+            else
+            {
+                context.OwinContext.Response.Headers.Add("Fullname", new[] { "error:unknown" });
+            }
+           
+            context.OwinContext.Response.Headers.Add("Email", new[] { user.Email });
+
             if (roleName == "Admin")
             {
                 context.OwinContext.Response.Headers.Add("Role", new[] { "Admin" });
@@ -64,7 +77,7 @@ namespace BookingApp.Providers
 
             //Mora se dodati u header response-a kako bi se se Role atribut
             //mogao procitati na klijentskoj strani
-            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Role","Id" });
+
             
 
             //if (!user.EmailConfirmed)

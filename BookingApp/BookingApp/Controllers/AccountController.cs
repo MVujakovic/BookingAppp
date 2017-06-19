@@ -46,13 +46,14 @@ namespace BookingApp.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
+
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
+        
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
@@ -110,6 +111,7 @@ namespace BookingApp.Controllers
         }
 
         // POST api/Account/ChangePassword
+        
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
@@ -118,6 +120,8 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            // ovaj je glup i ne konta uvek pasword ako je broj ili specijalni karakter pozicioniran bas uz slovo, i result.Succeded uvek bude false
+            // znaci nece da se promeni sifra uvek. -.- ako menjas sa "admin" na "Admin1" ne moze, bar kod mene je padalo, nego mora "admin" -> "Admin 1"
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
 
