@@ -6,14 +6,28 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using System.Web.Http.Cors;
-using System.Net.Http.Headers;
 
+using System.Web.Http.OData.Builder;
+using System.Web.Http.OData.Extensions;
+using BookingApp.Models;using System.Net.Http.Headers;
 namespace BookingApp
 {
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
-        {	
+        {
+            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            builder.EntitySet<Accomodation>("AccomOData");
+            builder.EntitySet<AccommodationType>("AccommodationTypes");
+            builder.EntitySet<Comment>("Comments");
+            builder.EntitySet<AppUser>("AppUsers");
+            builder.EntitySet<Country>("Countries");
+            builder.EntitySet<Region>("Regions");
+            builder.EntitySet<Place>("Places");
+            builder.EntitySet<Room>("Rooms");
+            builder.EntitySet<RoomReservations>("RoomReservations");
+            config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
