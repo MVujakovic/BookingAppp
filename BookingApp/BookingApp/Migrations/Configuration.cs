@@ -295,27 +295,129 @@ namespace BookingApp.Migrations
                     OwnerId =owner.appUserId,
                     Latitude=45.26714,
                     Longitude=19.8,
+                    AverageGrade=4.5,
+                    Description="Great hotel", //lako cemo promeniti ovaj opis, samo da pise nesto sad
+                    Address="Novosadskog sajma 35",
                      //ImageUrl="~Content/Images/hotelPark.jpg"  // na ovoj lokaciji ce biti slike   
                     ImageUrl="hotelPark.jpg"
                 },
-                new Accomodation(){ Name="Hotel Prezident", AccomodationTypeId=accTypes[0].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId, Latitude=45.26714,Longitude=19.85},
+                new Accomodation()
+                {
+                    Name ="Hotel Prezident",
+                    AccomodationTypeId =accTypes[0].Id,
+                    PlaceId =places[1].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =45.26714,
+                    Longitude =19.85,
+                    AverageGrade=3.8,
+                    Description="Very good",
+                    Address="Futoska 109"
+                },
 
-                new Accomodation(){ Name="City Hostel", AccomodationTypeId=accTypes[1].Id,PlaceId=places[1].Id, OwnerId=owner.appUserId,Latitude=45.26714,Longitude=19.83355},
+                new Accomodation()
+                {
+                    Name ="City Hostel",
+                    AccomodationTypeId =accTypes[1].Id,
+                    PlaceId =places[1].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =45.26714,
+                    Longitude =19.83355,
+                    AverageGrade=2.5,
+                    Description="Nice hostel",
+                    Address="Radnicka 21"
+                },
 
                 // karlovci
-                new Accomodation(){ Name="Premier Prezident", AccomodationTypeId=accTypes[0].Id,PlaceId=places[2].Id,OwnerId=owner.appUserId,Latitude=45.2025,Longitude=19.93444},
-                new Accomodation(){ Name="Apartman Zeravica", AccomodationTypeId=accTypes[2].Id,PlaceId=places[2].Id, OwnerId=owner.appUserId,Latitude=45.2025,Longitude=19.9},
+                new Accomodation()
+                {
+                    Name ="Premier Prezident",
+                    AccomodationTypeId =accTypes[0].Id,
+                    PlaceId =places[2].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =45.2025,
+                    Longitude =19.93444,
+                    AverageGrade=4.2,
+                    Description="Great",
+                    Address="Karadjordjeva 2"
+                },
+                new Accomodation()
+                {
+                    Name ="Apartman Zeravica",
+                    AccomodationTypeId =accTypes[2].Id,
+                    PlaceId =places[2].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =45.2025,
+                    Longitude =19.9,
+                    AverageGrade=3,
+                    Description="Very nice",
+                    Address="Brace Dejanovic 7"
+                },
 
                 // sidnej :) 
-                new Accomodation(){ Name="Hotel Hilton", AccomodationTypeId=accTypes[0].Id,PlaceId=places[5].Id, OwnerId=owner.appUserId,Latitude=-33.86749,Longitude=151.20699},
-                new Accomodation(){ Name="The Glebe", AccomodationTypeId=accTypes[2].Id,PlaceId=places[5].Id, OwnerId=owner.appUserId,Latitude=-33.86749,Longitude=151},
+                new Accomodation()
+                {
+                    Name ="Hotel Hilton",
+                    AccomodationTypeId =accTypes[0].Id,
+                    PlaceId =places[5].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =-33.86749,
+                    Longitude =151.20699,
+                    AverageGrade=5,
+                    Description="The best hotel",
+                    Address="488 George St"
+                },
+                new Accomodation()
+                {
+                    Name ="The Glebe",
+                    AccomodationTypeId =accTypes[2].Id,
+                    PlaceId =places[5].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =-33.86749,
+                    Longitude =151,
+                    AverageGrade=2,
+                    Description="Ok",
+                    Address="Greek street 2037"
+                },
 
                 // hamar
-                new Accomodation(){ Name="Iceland Air", AccomodationTypeId=accTypes[0].Id,PlaceId=places[7].Id, OwnerId=owner.appUserId,Latitude=60.79453,Longitude=11.06800},
-                new Accomodation(){ Name="Scandic Hamar", AccomodationTypeId=accTypes[0].Id,PlaceId=places[7].Id,OwnerId=owner.appUserId,Latitude=60.79453,Longitude=10.9},
+                new Accomodation()
+                {
+                    Name ="Iceland Air",
+                    AccomodationTypeId =accTypes[0].Id,
+                    PlaceId =places[7].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =60.79453,
+                    Longitude =11.06800,
+                    AverageGrade=3.9,
+                    Description="Recomended",
+                    Address="310 Borgarnes"
+                },
+                new Accomodation()
+                {
+                    Name ="Scandic Hamar",
+                    AccomodationTypeId =accTypes[0].Id,
+                    PlaceId =places[7].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =60.79453,
+                    Longitude =10.9,
+                    AverageGrade=2.4,
+                    Description="Welcome",
+                    Address="Vangsvegen 121"
+                },
 
                 // havana
-                new Accomodation(){ Name="Inglaterra Hotel", AccomodationTypeId=accTypes[0].Id,PlaceId=places[9].Id, OwnerId=owner.appUserId,Latitude=23.11359,Longitude= -82.36660},
+                new Accomodation()
+                {
+                    Name ="Inglaterra Hotel",
+                    AccomodationTypeId =accTypes[0].Id,
+                    PlaceId =places[9].Id,
+                    OwnerId =owner.appUserId,
+                    Latitude =23.11359,
+                    Longitude = -82.36660,
+                    AverageGrade=4.4,
+                    Description="Welcome to Havana",
+                    Address=" 416 Paseo de Marti"
+                },
             };
 
             // ne moze na istom mestu dva smestaja da se isto zovu 
@@ -323,6 +425,7 @@ namespace BookingApp.Migrations
             ContextHelper.SaveChanges(context);
             #endregion
 
+            //treba da dodamo ovo dodavanje soba i rezervacija
             #region AddingRooms
 
             #endregion
