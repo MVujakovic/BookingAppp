@@ -57,7 +57,7 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(Accomodation))]
         public IHttpActionResult GetAccomodation(int id)
         {
-            Accomodation accomodation = db.Accomodations.Where(a => a.Id == id).Include("Rooms").Include("Place").Include("AccomodationType").SingleOrDefault();
+            Accomodation accomodation = db.Accomodations.Where(a => a.Id == id).Include("Rooms").Include("Place").Include("AccomodationType").Include("Comments").SingleOrDefault();
             //Accomodation accomodation = db.Accomodations.Find(id);
             if (accomodation == null)
             {
