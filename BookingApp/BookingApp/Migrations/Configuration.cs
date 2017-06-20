@@ -291,11 +291,13 @@ namespace BookingApp.Migrations
                 new Accomodation()
                 {
                     Name ="Hotel Park",
-                    AccomodationTypeId =accTypes[0].Id,PlaceId=places[1].Id,
+                    AccomodationTypeId =accTypes[0].Id,
+                    PlaceId =places[1].Id,
                     OwnerId =owner.appUserId,
                     Latitude=45.26714,
                     Longitude=19.8,
                     AverageGrade=4.5,
+                    Approved=true,
                     Description="Great hotel", //lako cemo promeniti ovaj opis, samo da pise nesto sad
                     Address="Novosadskog sajma 35",
                      //ImageUrl="~Content/Images/hotelPark.jpg"  // na ovoj lokaciji ce biti slike   
@@ -310,6 +312,7 @@ namespace BookingApp.Migrations
                     Latitude =45.26714,
                     Longitude =19.85,
                     AverageGrade=3.8,
+                    Approved=true,
                     Description="Very good",
                     Address="Futoska 109"
                 },
@@ -323,6 +326,7 @@ namespace BookingApp.Migrations
                     Latitude =45.26714,
                     Longitude =19.83355,
                     AverageGrade=2.5,
+                    Approved=true,
                     Description="Nice hostel",
                     Address="Radnicka 21"
                 },
@@ -349,6 +353,7 @@ namespace BookingApp.Migrations
                     Latitude =45.2025,
                     Longitude =19.9,
                     AverageGrade=3,
+                    Approved=true,
                     Description="Very nice",
                     Address="Brace Dejanovic 7"
                 },
@@ -427,6 +432,68 @@ namespace BookingApp.Migrations
 
             //treba da dodamo ovo dodavanje soba i rezervacija
             #region AddingRooms
+
+            var rooms = new List<Room>()
+            {
+                new Room()
+                {
+                    RoomNumber=1,
+                    Description="ok",
+                    BedCount=2,
+                    AccomodationId=1,
+                    PricePerNight=10
+                },
+
+                new Room()
+                {
+                    RoomNumber=2,
+                    Description="ok",
+                    BedCount=2,
+                    AccomodationId=1,
+                    PricePerNight=12
+                },
+
+                new Room()
+                {
+                    RoomNumber=3,
+                    Description="ok",
+                    BedCount=1,
+                    AccomodationId=1,
+                    PricePerNight=15
+                },
+
+                new Room()
+                {
+                    RoomNumber=1,
+                    Description="ok",
+                    BedCount=3,
+                    AccomodationId=2,
+                    PricePerNight=14
+                },
+
+                new Room()
+                {
+                    RoomNumber=2,
+                    Description="ok",
+                    BedCount=4,
+                    AccomodationId=2,
+                    PricePerNight=20
+                },
+
+                new Room()
+                {
+                    RoomNumber=3,
+                    Description="ok",
+                    BedCount=2,
+                    AccomodationId=2,
+                    PricePerNight=20
+                }
+            };
+
+            // ne moze u istom hotelu dve sobe da imaju isti broj
+            context.Rooms.AddOrUpdate(room => new { room.RoomNumber, room.AccomodationId }, rooms.ToArray());
+            ContextHelper.SaveChanges(context);
+            //ne znam sta treba da kucam kod ovog addOrUpdate
 
             #endregion
 
