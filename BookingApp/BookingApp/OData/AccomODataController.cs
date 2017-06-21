@@ -43,7 +43,7 @@ namespace BookingApp.OData
         [EnableQuery]
         public IQueryable<Accomodation> GetAccomOData()
         {
-            return db.Accomodations;
+            return db.Accomodations.Include("Comments");
         }
 
         // GET: odata/Accomodations(5)
